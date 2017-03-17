@@ -1,0 +1,29 @@
+{
+  "name": "propatrack",
+  "version": "0.0.1",
+  "description": "propathink performance tracker",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/propadata/propatrack.git"
+  },
+  "keywords": [
+    "propadata",
+    "propathink",
+    "performance",
+    "tracker"
+  ],
+  "author": "Jon Swenson",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/propadata/propatrack/issues"
+  },
+  "homepage": "https://github.com/propadata/propatrack#readme",
+  "engines": {
+    "node": ">=4.x.x",
+    "npm": ">= 3.x"
+  },
+}
