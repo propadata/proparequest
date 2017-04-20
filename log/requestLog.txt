@@ -1,0 +1,2 @@
+{"statusCode":"201","statusMessage":"SUCCESS","action":"actionName","time":{"start":1492712906405,"stop":1492712906406,"elapse":1},"result":{"name":"result object"}}
+{"statusCode":"201","statusMessage":"SUCCESS","action":"actionName","time":{"start":1492712906431,"stop":1492712906431,"elapse":0},"result":{"name":"result object"}}

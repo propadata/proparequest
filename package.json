@@ -1,10 +1,10 @@
 {
-  "name": "propatrack",
+  "name": "proparequest",
   "version": "0.0.1",
   "description": "propathink performance tracker",
   "main": "lib/index.js",
   "scripts": {
-    "test": "test"
+    "test": "lab -a code -t 100 -L -v"
   },
   "repository": {
     "type": "git",
@@ -25,5 +25,9 @@
   "engines": {
     "node": ">=4.x.x",
     "npm": ">= 3.x"
+  },
+  "devDependencies": {
+    "code": "^4.0.0",
+    "lab": "^13.0.2"
   }
 }
