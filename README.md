@@ -44,11 +44,25 @@ proparequest writes below object to log file:
     result 
 
 
-## example usage
+## Overview 
 
 * 1) Generate Request object [new Request(pathToLogFile)](#generate-link)</a>
 * 2) Initiate the request. [init(requestData)](#init-link)
 * 3) Log completion of the request. [log(statusCode, statusMessage, actionName, result)](#log-link)
+
+```JavaScript
+const Request = require('proparequest');
+
+const request = new Request(pathToLogFile); 
+
+const requestData = { requestName: 'exampleRequest', data: 'sample data' };
+
+request.init(requestData);
+
+request.log('201', 'SUCCESS', 'userCreate', result);
+
+```
+
 
 #### <a name="generate-link">new Request(pathToLogFile)</a> 
 
@@ -62,7 +76,7 @@ const request = new Request(pathToLogFile);
 
 #### <a name="init-link">init(requestData)</a> 
 
-*requestData* data received from used to make the request.
+*requestData*: data received from user to make the request.
 
 Example below:
 ```JavaScript
@@ -92,6 +106,7 @@ request.log('201', 'SUCCESS', 'userCreate', result);
 #### <a name="pretty-link">pretty()</a> 
 
 For debugging, prints log record object written to file. 
-Print is pretty string format. JSON.stringify(object, null, '\t') 
+Print is pretty string format. <br/> 
+JSON.stringify(object, null, '\t') 
 
 
