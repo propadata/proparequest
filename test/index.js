@@ -22,7 +22,7 @@ const internals = {
 const Request = require('../lib');
 const Fs = require('fs');
 
-describe('sucsessfully log record.', () => {
+describe('Experiment: sucsessfully log record.', () => {
 
     lab.before((done) => {
 
@@ -30,22 +30,25 @@ describe('sucsessfully log record.', () => {
 
         Fs.unlink(internals.logfilePath, (err) => {
 
-            if (err) throw err;
+            if (err) {
+                throw err;
+            };
 
-            console.log('successfully deleted ../log/requestLog.txt');
+            // console.log('successfully deleted ../log/requestLog.txt');
 
             done();
         });
-
     });
 
     it('log record', (done) => {
-        
+
         const request = new Request(internals.logfilePath);
 
-        // console.log(JSON.stringify(request));
-        // console.log(JSON.stringify(Object.keys(request)));
-        request.init();  //  sets startTime value for request.
+        // mock received request object from user.
+
+        const requestData = { requestName: 'exampleRequest', data: 'sample data' };
+
+        request.init(requestData);
 
         request.log('201', 'SUCCESS', 'actionName', { name: 'result object' });
 
@@ -56,26 +59,56 @@ describe('sucsessfully log record.', () => {
 
         Fs.readFile(internals.logfilePath, (err, data) => {
 
-              if (err) throw err;
+            if (err) {
+                throw err;
+            }
+            expect(err).to.not.exist();
 
-              const record = JSON.parse(data);
+            const record = JSON.parse(data);
 
-              expect(record.statusMessage).to.equal('SUCCESS');
-              done();
+            expect(record.statusMessage).to.equal('SUCCESS');
+            done();
         });
     });
 
     it('success pretty print', (done) => {
-        
+
         const request = new Request(internals.logfilePath);
 
-        request.init();  //  sets startTime value for request.
+        const requestData = { requestName: 'exampleRequest', data: 'sample data' };
+
+        request.init(requestData);  //  sets startTime value for request.
 
         request.log('201', 'SUCCESS', 'actionName', { name: 'result object' });
 
-        // Gets coverage.
+        // Get coverage.
 
-        request.pretty(); 
+        request.pretty();
+        done();
+    });
+});
+
+describe('Experiment: fail to write log record.', () => {
+
+    it('fail log record write coverage', (done) => {
+
+        const request = new Request(internals.logfilePath);
+
+        // Fs.appendFile(this.pathToLogFile, logRecordString, (err) => {
+        const original = Fs.appendFile;
+
+        Fs.appendFile = (pathToLogFile, logRecordString, callback) => {
+
+            Fs.appendFile = original;
+            return callback(new Error('appendFile failed'));
+        };
+
+        const requestData = { requestName: 'exampleRequest', data: 'sample data' };
+
+        request.init(requestData);
+
+        request.log('201', 'SUCCESS', 'actionName', { name: 'result object' });
+
         done();
     });
 });
