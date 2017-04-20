@@ -1,8 +1,6 @@
 # proparequest 
 
-Records every database request to a log file to 
-track requests made and performance. 
-request object to manage rethindb request results.
+Record and track requests and performance.
 propadata & groupthink performance tracker.
 * configure log file.
 * log request performance.
@@ -12,7 +10,7 @@ propadata & groupthink performance tracker.
 
 proparequest writes below object to log file:
 
-```
+``` JavaScript
 {
     "statusCode": "201",
     "statusMessage": "SUCCESS",
@@ -22,26 +20,27 @@ proparequest writes below object to log file:
         "stop": epoch time,
         "elapse": "differece between start and stop" 
     },
+    "request": "request object",
     "result": "result object"
 }
 ```
 
-## methods
-    * [init(pathToLogFile)](#init-link)
-    * [load(request)](#load-link)
-    * [log(statusCode, statusMessage, actionName, result)](#log-link)
-    * [pretty()](#pretty-link)
-    * *internal stop()*
+## methods 
+* [init(requestData)](#init-link)
+* [log(statusCode, statusMessage, actionName, result)](#log-link)
+* [pretty()](#pretty-link)
+* *internal stop()*
     
 
 ## properties
-    start
-    end
-    elapse
+    startTime
+    endTime
+    elapseTime
     pathToLogfile
     statusCode
     statusMessage
     action
+    request
     result 
 
 
@@ -54,7 +53,7 @@ proparequest writes below object to log file:
 #### <a name="generate-link">new Request(pathToLogFile)</a> 
 
 Example below:
-```
+``` JavaScript
 const Request = require('proparequest');
 
 const request = new Request(pathToLogFile); 
@@ -66,7 +65,7 @@ const request = new Request(pathToLogFile);
 *requestData* data received from used to make the request.
 
 Example below:
-```
+```JavaScript
 const Request = require('proparequest');
 
 const request = new Request(pathToLogFile); 
@@ -81,7 +80,7 @@ request.log('201', 'SUCCESS', 'userCreate', result);
 
 #### <a name="log-link">log(statusCode, statusMessage, actionName, result)</a> 
 
-```
+``` JavaScript
 // log an error.
 request.log('403', 'ERROR', 'userCreate', error);
 
@@ -92,6 +91,7 @@ request.log('201', 'SUCCESS', 'userCreate', result);
 
 #### <a name="pretty-link">pretty()</a> 
 
-For debugging, prints log_record object in pretty string format.
+For debugging, prints log record object written to file. 
+Print is pretty string format. JSON.stringify(object, null, '\t') 
 
 
